@@ -1,0 +1,212 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+// Schema metadata for SEO
+const jsonLd = {
+  "@context": "https://schema.org/",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://altoby.com/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Work",
+    "item": "https://altoby.com/works"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": data.title,
+    "item": `https://altoby.com/work-details/${entry.id}`
+  }]
+};
+---
+
+<Base 
+  title={`${data.title} | Project Detail | Altoby`} 
+  description={data.description}
+  activePage="all-works"
+>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+    <div class="hero-section work-detail-hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h6>{data.title}</h6>
+                <h1>{data.subtitle}</h1>
+            </div>
+
+            <div class="row company-information">
+                <div class="col-5 col-sm-2">
+                    <p class="heading">Industry</p>
+                    <ul class="list">
+                        {data.industry.map(item => <li>{item}</li>)}
+                    </ul>
+                </div>
+
+                <div class="col-7 col-sm-3">
+                    <p class="heading">Services</p>
+                    <ul class="list">
+                        {data.services.map(item => <li>{item}</li>)}
+                    </ul>
+                </div>
+
+                <div class="col-sm-7 md-mt-40">
+                    <p class="para">{data.description}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="work-detail-section">
+        <div class="media main-banner">
+            <img src={data.coverImage} alt={data.title} loading="lazy" />
+        </div>
+
+        <div class="container">
+            {data.challengeText && (
+                <div class="row work-information">
+                    <div class="col-sm-5">
+                        <h2 class="section-sub-heading">
+                            {data.challengeHeading || "There were challenges along the way"}
+                        </h2>
+                    </div>
+                    <div class="col-sm-7">
+                        <p class="para">{data.challengeText}</p>
+                    </div>
+                </div>
+            )}
+
+            {data.image2 && (
+                <div class="media">
+                    <img src={data.image2} alt="Work Image 2" loading="lazy" />
+                </div>
+            )}
+
+            {data.image3 && (
+                <div class="media">
+                    <img src={data.image3} alt="Work Image 3" loading="lazy" />
+                </div>
+            )}
+
+            {data.quoteText && (
+                <div class="row work-information">
+                    <div class="col-sm-5">
+                        <img class="quote md-mb-32" src="/assets/images/icons/quote.svg" alt="Quote" loading="lazy" />
+                    </div>
+                    <div class="col-sm-7">
+                        <h2 class="section-sub-heading">{data.quoteText}</h2>
+                    </div>
+                </div>
+            )}
+
+            {data.image4 && (
+                <div class="media">
+                    <img src={data.image4} alt="Work Image 4" loading="lazy" />
+                </div>
+            )}
+
+            {(data.solutionHeading || data.solutionText1 || data.solutionText2) && (
+                <div class="row work-information">
+                    <div class="col-sm-6">
+                        <h2 class="section-sub-heading">{data.solutionHeading}</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        {data.solutionText1 && <p class="heading">{data.solutionText1}</p>}
+                        {data.solutionText2 && <p class="para-light">{data.solutionText2}</p>}
+                    </div>
+                </div>
+            )}
+
+            {data.gridImages && data.gridImages.length > 0 && (
+                <div class="row work-image-group">
+                    {data.gridImages.map((img, index) => (
+                        index < 2 ? (
+                            <div class="col-sm-6">
+                                <div class="media">
+                                    {img && <img src={img} alt={`Grid Image ${index + 1}`} loading="lazy" />}
+                                </div>
+                            </div>
+                        ) : (
+                            <div class="col-sm-12">
+                                <div class="media">
+                                    {img && <img src={img} alt={`Grid Image ${index + 1}`} loading="lazy" />}
+                                </div>
+                            </div>
+                        )
+                    ))}
+                </div>
+            )}
+
+            {data.impactText && (
+                <div class="row work-information">
+                    <div class="col-sm-5">
+                        <h2 class="section-sub-heading">{data.impactHeading || "The impact it had"}</h2>
+                    </div>
+                    <div class="col-sm-7">
+                        <p class="para">{data.impactText}</p>
+                    </div>
+                </div>
+            )}
+
+            <div class="row company-information">
+                {data.client && (
+                    <div class="col-6 col-sm-3">
+                        <p class="heading">Client</p>
+                        <ul class="list">
+                            <li>{data.client}</li>
+                        </ul>
+                    </div>
+                )}
+                {data.projectTeam && data.projectTeam.length > 0 && (
+                    <div class="col-6 col-sm-6">
+                        <p class="heading">Project team</p>
+                        <ul class="list project-team-list">
+                            {data.projectTeam.map(member => <li>{member}</li>)}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </div>
+    </div>
+
+    {data.upNextSlug && (
+        <div class="work-detail-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="section-heading">Up Next</h2>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="next-content-row">
+                            <div class="next-title" id="showBtn">
+                                <a href={`/work-details/${data.upNextSlug}`}>
+                                    {data.upNextTitle}
+                                </a>
+                            </div>
+
+                            <div class="next-img ml-auto">
+                                <img src={data.upNextImage} alt={data.upNextTitle} loading="lazy" />
+                                <p class="para-light">{data.upNextCategory}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )}
+</Base>

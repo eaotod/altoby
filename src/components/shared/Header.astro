@@ -1,0 +1,136 @@
+---
+interface Props {
+  activePage?: string;
+}
+const { activePage = "home" } = Astro.props;
+---
+
+<header class="header headerSticky">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="/">
+        <img src="/assets/images/logo.svg" alt="Altoby Logo" />
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class={`nav-item ${activePage === "home" ? "active" : ""}`}>
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class={`nav-item ${activePage === "works" ? "active" : ""}`}>
+            <a class="nav-link" href="/all-works">ALL WORKS</a>
+          </li>
+          <li class={`nav-item ${activePage === "what-we-do" ? "active" : ""}`}>
+            <a class="nav-link" href="/what-we-do">What We Do</a>
+          </li>
+          <li class={`nav-item ${activePage === "about" ? "active" : ""}`}>
+            <a class="nav-link" href="/about-us">ABOUT US</a>
+          </li>
+          <li class={`nav-item ${activePage === "contact" ? "active" : ""}`}>
+            <a class="nav-link" href="/get-in-touch">GET IN TOUCH</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navbar-toggle">
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile Menu Popup -->
+<div class="header-popup">
+  <div class="container">
+    <div class="row md-column-reverse">
+      <div class="col-lg-6">
+        <div class="left-content">
+          <h3 class="d-none d-lg-block">Give us a holla!</h3>
+          <a href="/get-in-touch" class="clink md-arrow-link white md-mb-40"
+            >GET IN TOUCH</a
+          >
+          <div class="d-none d-lg-block">
+            <h5 class="md-mb-24">Say hello</h5>
+            <a class="hlink" href="tel:+2547173422473">+254 717 342 2473</a><br
+            />
+            <a href="mailto:hello@altoby.com" class="hlink">hello@altoby.com</a>
+          </div>
+          <ul class="socialLink">
+            <li>
+              <a href="https://www.instagram.com/altoby/" target="_blank"
+                ><img
+                  src="/assets/images/icons/instagram.svg"
+                  alt="instagram"
+                /></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/company/altoby" target="_blank"
+                ><img
+                  src="/assets/images/icons/linkedin.svg"
+                  alt="linkedin"
+                /></a>
+            </li>
+            <li>
+              <a href="https://dribbble.com/altoby" target="_blank"
+                ><img
+                  src="/assets/images/icons/dribbble.svg"
+                  alt="dribbble"
+                /></a>
+            </li>
+            <li>
+              <a href="https://www.behance.net/altoby" target="_blank"
+                ><img
+                  src="/assets/images/icons/behance.svg"
+                  alt="behance"
+                /></a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/altoby/" target="_blank"
+                ><img
+                  src="/assets/images/icons/facebook.svg"
+                  alt="facebook"
+                /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row right-content">
+          <div class="col-12">
+            <ul class="quicklink">
+              <li class={activePage === "home" ? "active" : ""}>
+                <a href="/">Home</a>
+              </li>
+              <li class={activePage === "works" ? "active" : ""}>
+                <a href="/all-works">All Works</a>
+              </li>
+              <li class={activePage === "what-we-do" ? "active" : ""}>
+                <a href="/what-we-do">What We Do</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-12">
+            <h5 class="md-mb-24">Other links</h5>
+            <ul class="otherLink">
+              <li><a href="/about-us">About Us</a></li>
+              <li>
+                <a href="/latest-news">Latest News</a><span class="linkSpan">NEW</span>
+              </li>
+              <li>
+                <a href="#">Careers</a><span class="linkSpan">COMING SOON</span>
+              </li>
+              <li><a href="/get-in-touch">GET IN TOUCH</a></li>
+            </ul>
+          </div>
+          <div class="col-6 d-block d-lg-none">
+            <h5>Say hello</h5>
+            <a href="tel:+2547173422473" class="hlink">+254 717 342 2473</a><br
+            />
+            <a href="mailto:hello@altoby.com" class="hlink">hello@altoby.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+
+const works = await getCollection('works');
+console.log('DEBUG: Works collection length:', works.length);
+---
+<!-- Works Section - exact legacy HTML from index.php lines 701-1001 -->
+<section class="works-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-sm-8">
+        <h2 class="section-heading">
+          <span>Our <br />WoahrK!</span>
+          <span class="vector WoahrK-vector">
+            <img width="290" src="/assets/images/heading/woahrK.avif" alt="WORK" loading="lazy" />
+          </span>
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="worklist-carousel worklist owl-carousel owl-theme rounded-owl-nav">
+      {works.map((work) => (
+        <div class="worklist-item">
+          <a href={`/work-details/${work.id}`}>
+            <img src={work.data.coverImage} alt={work.data.title} loading="lazy" />
+            <div class="content">
+              <h5>{work.data.title}</h5>
+              <h6>{work.data.industry[0]}</h6>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
