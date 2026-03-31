@@ -126,7 +126,7 @@ export const CLIENT_LOCATIONS = [
 export const CONTACT = {
   phone: "+254 717 342 473",
   email: "hello@altoby.com",
-  location: "Nairobi, Kenya / Global",
+  location: "ABC Place, Waiyaki Way, Nairobi",
   whatsappUrl: "https://wa.me/254717342473",
   crmUrl: "https://crm.altoby.com",
   notificationEmail: 'imma.allan@gmail.com',
