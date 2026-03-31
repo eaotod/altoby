@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
 
@@ -32,9 +32,7 @@ export default defineConfig({
     },
   ],
 
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: vercel(),
 
   integrations: [preact(), sitemap()],
 });
