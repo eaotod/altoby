@@ -20,7 +20,7 @@ export const BUSINESS = {
   phone: "+254717342473",
   email: "hello@altoby.com",
   address: {
-    streetAddress: "CBD, Nairobi",
+    streetAddress: "ABC Place, Waiyaki Way, Nairobi",
     city: "Nairobi",
     region: "Nairobi County",
     postalCode: "00100",
