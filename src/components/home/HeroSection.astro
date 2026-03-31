@@ -1,36 +1,128 @@
-<!-- Hero Section - exact legacy HTML from index.php lines 611-631 -->
-<section class="hero-section home-hero-section">
-  <div class="container">
-    <div class="hero-content">
-      <h1>
-        BRANDING THAT <span class="d-none d-md-block">
-          <img
-            width="675"
-            src="/assets/images/icons/union.gif"
-            alt="Balloon popping"
-          /></span
-        > POPS <span class="d-inline d-md-none"
-          ><img
-            width="300"
-            src="/assets/images/icons/union.gif"
-            alt="Balloon popping"
-          /></span
-        >&
-      </h1>
-      <h1>
-        UI/UX that <span class="d-none d-md-block"
-          ><img
-            width="318"
-            src="/assets/images/icons/design.gif"
-            alt="Cat clicking"
-          /></span
-        > clicks.<span class="d-inline d-md-none"
-          ><img
-            width="200"
-            src="/assets/images/icons/design.gif"
-            alt="Cat clicking"
-          /></span>
-      </h1>
-    </div>
+---
+import { Image } from "astro:assets";
+import heroGif from "../../assets/images/hero1.gif";
+// import heroImg from "../../assets/images/hero2.gif";
+---
+
+<section class="hero" id="hero">
+  <!-- Brand Eyebrow -->
+  <div class="hero-brand-eyebrow">
+    <span class="eyebrow-number">
+      <svg
+        width="60"
+        height="60"
+        viewBox="0 0 60 60"
+        fill="none"
+        class="eyebrow-svg"
+      >
+        <g clip-path="url(#clip0_3582_195304)">
+          <path
+            d="M31.0049 7.0421L28.2225 9.06282L29.2853 5.79275L26.5029 3.77008H29.942L31.0049 0.5L32.0677 3.77008H35.5068L32.7244 5.79275L33.7873 9.06282L31.0049 7.0421Z"
+            fill="#505967"></path>
+          <path
+            d="M43.7314 10.2589L40.949 12.2816L42.0119 9.00954L39.2295 6.98882H42.6686L43.7314 3.7168L44.7943 6.98882H48.2353L45.4529 9.00954L46.5158 12.2816L43.7314 10.2589Z"
+            fill="#505967"></path>
+          <path
+            d="M52.9316 19.7296L50.1492 21.7503L51.2121 18.4783L48.4297 16.4576H51.8688L52.9316 13.1875L53.9945 16.4576H57.4336L54.6512 18.4783L55.714 21.7503L52.9316 19.7296Z"
+            fill="#505967"></path>
+          <path
+            d="M56.7705 32.9698L53.9881 34.9906L55.0509 31.7205L52.2686 29.6978H55.7077L56.7705 26.4277L57.8333 29.6978H61.2724L58.4901 31.7205L59.5529 34.9906L56.7705 32.9698Z"
+            fill="#505967"></path>
+          <path
+            d="M52.8945 45.4405L50.1121 47.4632L51.175 44.1912L48.3926 42.1705H51.8317L52.8945 38.8984L53.9573 42.1705H57.3965L54.6141 44.1912L55.6769 47.4632L52.8945 45.4405Z"
+            fill="#505967"></path>
+          <path
+            d="M43.7139 54.6944L40.9315 56.7152L41.9943 53.4451L39.2119 51.4224H42.651L43.7139 48.1523L44.7767 51.4224H48.2158L45.4334 53.4451L46.4962 56.7152L43.7139 54.6944Z"
+            fill="#505967"></path>
+          <path
+            d="M18.0732 10.2589L20.8556 12.2816L19.7928 9.00954L22.5752 6.98882H19.1361L18.0732 3.7168L17.0104 6.98882H13.5713L16.3537 9.00954L15.2908 12.2816L18.0732 10.2589Z"
+            fill="#505967"></path>
+          <path
+            d="M8.87596 19.7296L11.6583 21.7503L10.5955 18.4783L13.3779 16.4576H9.93878L8.87596 13.1875L7.81313 16.4576H4.37207L7.1564 18.4783L6.09357 21.7503L8.87596 19.7296Z"
+            fill="#505967"></path>
+          <path
+            d="M5.22851 32.9698L8.01089 34.9906L6.94807 31.7205L9.73045 29.6978H6.29133L5.22851 26.4277L4.16568 29.6978H0.726562L3.50895 31.7205L2.44612 34.9906L5.22851 32.9698Z"
+            fill="#505967"></path>
+          <path
+            d="M8.91015 45.4405L11.6925 47.4632L10.6297 44.1912L13.414 42.1705H9.97297L8.91015 38.8984L7.84732 42.1705H4.4082L7.19059 44.1912L6.12776 47.4632L8.91015 45.4405Z"
+            fill="#505967"></path>
+          <path
+            d="M18.0908 54.6944L20.8732 56.7152L19.8104 53.4451L22.5928 51.4224H19.1536L18.0908 48.1523L17.028 51.4224H13.5889L16.3713 53.4451L15.3084 56.7152L18.0908 54.6944Z"
+            fill="#505967"></path>
+          <path
+            d="M31.0371 58.4796L28.2547 60.5003L29.3175 57.2302L26.5352 55.2095H29.9743L31.0371 51.9375L32.0999 55.2095H35.539L32.7567 57.2302L33.8195 60.5003L31.0371 58.4796Z"
+            fill="#505967"></path>
+          <path
+            d="M28.5758 37.7475L22.5039 31.6756L24.8394 29.3401L28.5758 33.0765L37.1367 24.5156L39.4722 26.8511L28.5758 37.7475Z"
+            fill="#505967"></path>
+        </g>
+        <defs>
+          <clipPath id="clip0_3582_195304">
+            <rect
+              width="60.546"
+              height="60"
+              fill="white"
+              transform="translate(0.726562 0.5)"></rect>
+          </clipPath>
+        </defs>
+      </svg>
+    </span>
+    <span class="eyebrow-text">Digital Growth Partner</span>
   </div>
+
+  <!-- Main Heading -->
+  <h1 class="hero-heading">
+    Your firm
+    <span class="orrery-wrapper">
+      <div class="orrery">
+        <!-- Back halves (rendered below globe) -->
+        <div class="ring ring-back ring-1"></div>
+        <div class="ring ring-back ring-2"></div>
+
+        <!-- Globe -->
+        <div class="globe"></div>
+
+        <!-- Front halves (rendered above globe) -->
+        <div class="ring ring-front ring-1"></div>
+        <div class="ring ring-front ring-2"></div>
+
+        <!-- Axis (always topmost, never moves) -->
+        <div class="axis">
+          <div class="pole pole-n"></div>
+          <div class="pole pole-s"></div>
+        </div>
+      </div>
+    </span>
+    deserves<br />
+    more than a
+    <!-- <span class="emoji circle-img"
+      ><Image src={heroImg} alt="Focus & Growth" /></span
+    > -->
+    <br />
+    <span class="accent">stale website.</span>
+  </h1>
+
+  <!-- Sub-text -->
+  <p class="hero-description">
+    Altoby helps law firms, consultancies, and professional services businesses
+    build a credible digital presence that actually wins clients — through sharp
+    web design, consistent content, and smart automation.
+  </p>
+
+  <!-- CTA -->
+  <a href="/#contact" class="hero-cta" id="hero-cta">
+    Book a Free Audit
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+    </svg>
+  </a>
 </section>

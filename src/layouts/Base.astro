@@ -1,246 +1,93 @@
 ---
-import Header from '../components/shared/Header.astro';
-import Footer from '../components/shared/Footer.astro';
+import Header from "../components/shared/Header.astro";
+import Footer from "../components/shared/Footer.astro";
+import SEOHead from "../components/shared/SEOHead.astro";
+import OrganizationSchema from "../components/seo/OrganizationSchema.astro";
+import "../assets/css/main.css";
+import { Font } from "astro:assets";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: "website" | "article" | "profile";
+  keywords?: string;
+  noIndex?: boolean;
   activePage?: string;
 }
 
 const {
-  title = "Altoby | Award-Winning Branding & UI/UX Design Studio",
-  description = "Elevate your business potential with Altoby's accessible design solutions. We build impactful brands and user experiences to help you stand out in any industry.",
-  canonicalUrl = "https://www.altoby.com",
-  activePage = "home"
+  title = "Altoby — Digital Growth for Professional Services | Nairobi",
+  description = "Altoby helps law firms, consultancies, and professional services businesses build a credible digital presence that actually wins clients — through sharp web design, consistent content, and smart automation.",
+  canonicalUrl,
+  ogImage,
+  ogType = "website",
+  keywords,
+  noIndex = false,
+  activePage = "home",
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href={canonicalUrl} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Robots -->
-  <meta name="X-Robots-Tag" content="index,follow" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="language" content="English" />
+    <!-- SEO Head (Yoast-equivalent meta generation) -->
+    <SEOHead
+      title={title}
+      description={description}
+      canonicalUrl={canonicalUrl}
+      ogImage={ogImage}
+      ogType={ogType}
+      keywords={keywords}
+      noIndex={noIndex}
+    />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content={title} />
-  <meta property="og:site_name" content="Altoby" />
-  <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/assets/images/og-image.png" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/web-app-manifest-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/web-app-manifest-512x512.png"
+    />
+    <link rel="mask-icon" href="/mask-icon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="msapplication-TileColor" content="#FF4500" />
+    <meta name="theme-color" content="#f5f5f0" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
+    <!-- Inject Satoshi Font configured in astro.config.mjs -->
+    <Font cssVariable="--font-body" />
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="mask-icon" href="/mask-icon.svg" />
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="msapplication-TileColor" content="#E0FF00" />
-  <meta name="theme-color" content="#E0FF00" />
+    <!-- Global Structured Data (every page) -->
+    <OrganizationSchema />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/assets/vendor/owlCarousel/owl.carousel.min.css" />
-  <link rel="stylesheet" href="/assets/css/main.css" />
+    <!-- Per-page structured data slot -->
+    <slot name="schema" />
 
-  <!-- Theme Script (Blocking to prevent FOUC) -->
-  <script is:inline>
-    const theme = (() => {
-      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-        return localStorage.getItem('theme');
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-      return 'dark'; // Default to dark for Altoby
-    })();
-  
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
-  </script>
+    <!-- Per-page custom head content -->
+    <slot name="head" />
+  </head>
 
-  <slot name="head" />
-</head>
+  <body>
+    <Header activePage={activePage} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
 
-<body>
-  <div class="cursor-dot-outline"></div>
-  <div class="cursor-dot"></div>
-
-  <!-- Theme Toggle -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-    <div class="toggle-icon">
-      <div class="sun-rays"></div>
-    </div>
-  </button>
-
-  <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/2547173422473" class="whatsapp-btn" target="_blank" aria-label="Chat on WhatsApp">
-    <img src="/assets/images/icons/whatsapp.svg" alt="WhatsApp" />
-  </a>
-
-  <style is:global>
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: #25D366;
-      border: none;
-      cursor: pointer;
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: pulse-wa 2s infinite;
-    }
-
-    @keyframes pulse-wa {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-
-    .whatsapp-btn img {
-      width: 24px !important;
-      height: 24px !important;
-    }
-
-    .whatsapp-btn:hover {
-      transform: scale(1.1);
-    }
-    
-    .whatsapp-btn:active {
-      transform: scale(0.95);
-    }
-
-    /* Theme Toggle Styles (now in Header or as fixed Top) */
-    .theme-toggle {
-      background: var(--color-accent);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      transition: transform 0.3s ease;
-      margin-left: 20px;
-    }
-    
-    .theme-toggle:hover {
-      transform: rotate(15deg) scale(1.1);
-    }
-    
-    .toggle-icon {
-      position: relative;
-      width: 18px;
-      height: 18px;
-      background: #000;
-      border-radius: 50%;
-      transition: all 0.5s ease;
-    }
-    [data-theme="light"] .toggle-icon {
-      background: #000;
-      transform: scale(1.2);
-    }
-    [data-theme="dark"] .toggle-icon {
-      background: transparent;
-      box-shadow: inset -6px -3px 0 0 #000;
-    }
-    .theme-toggle {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--color-accent);
-      border: none;
-      cursor: pointer;
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .theme-toggle:hover {
-      transform: scale(1.1);
-    }
-    .sun-rays {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 30px;
-      height: 30px;
-      display: none;
-    }
-    [data-theme="light"] .sun-rays {
-      display: block;
-    }
-    .sun-rays::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      width: 2px; height: 100%;
-      background: #000;
-      transform: translateX(-50%);
-    }
-  </style>
-
-  <Header activePage={activePage} />
-  <slot />
-  <Footer />
-
-  <!-- JavaScript (loaded via is:inline to preserve jQuery behavior) -->
-  <script is:inline>
-    const toggleBtn = document.getElementById('theme-toggle');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-      });
-    }
-  </script>
-
-  <script is:inline src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script is:inline>
-    window.jQuery || document.write('<script src="/assets/vendor/jquery/jquery-3.3.1.min.js"><\/script>')
-  </script>
-  <script is:inline src="/assets/vendor/jquery/jquery.mousewheel.min.js"></script>
-  <script is:inline src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script is:inline src="/assets/vendor/owlCarousel/owl.carousel.min.js"></script>
-  <script is:inline src="/assets/vendor/marquee/jquery.marquee.min.js"></script>
-  <script is:inline src="/assets/js/main.js"></script>
-  <script is:inline src="/assets/js/horizontalScroll.js"></script>
-</body>
+    <slot name="scripts" />
+  </body>
 </html>

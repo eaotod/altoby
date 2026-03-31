@@ -12,6 +12,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.0.8"
+    "@astrojs/node": "^10.0.4",
+    "@astrojs/preact": "^5.1.0",
+    "@astrojs/sitemap": "^3.7.2",
+    "@supabase/supabase-js": "^2.101.0",
+    "astro": "^6.1.2",
+    "preact": "^10.29.0",
+    "resend": "^6.10.0"
   }
 }

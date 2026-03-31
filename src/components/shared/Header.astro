@@ -1,136 +1,123 @@
 ---
+import { Image } from "astro:assets";
+import logo from "../../assets/logos/altoby.svg";
+
 interface Props {
   activePage?: string;
 }
 const { activePage = "home" } = Astro.props;
 ---
 
-<header class="header headerSticky">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="/">
-        <img src="/assets/images/logo.svg" alt="Altoby Logo" />
-      </a>
+<header class="site-header" id="site-header">
+  <!-- Framer Notch (inline styles prevent FOUC flicker on dev reloads) -->
+  <div
+    class="header-notch notch"
+    style="width: 342px; height: 36px; position: absolute; left: 50%; top: -1px; transform: translateX(-50%); opacity: 0; animation: notchEnter 0.6s var(--ease-spring) both;"
+  >
+    <div class="notch-bg">
+      <svg
+        width="342"
+        height="36"
+        preserveAspectRatio="none"
+        viewBox="0 0 342 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 0C10.5 0 17.5 4.5 22 13C26.5 21.5 35.5 36 50.5 36H291.5C306.5 36 315.5 21.5 320 13C324.5 4.5 331.5 0 342 0Z"
+          fill="var(--color-dark)"></path>
+      </svg>
+    </div>
+    <div class="notch-dot"></div>
+    <div class="notch-text">Available for New Projects</div>
+  </div>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class={`nav-item ${activePage === "home" ? "active" : ""}`}>
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class={`nav-item ${activePage === "works" ? "active" : ""}`}>
-            <a class="nav-link" href="/all-works">ALL WORKS</a>
-          </li>
-          <li class={`nav-item ${activePage === "what-we-do" ? "active" : ""}`}>
-            <a class="nav-link" href="/what-we-do">What We Do</a>
-          </li>
-          <li class={`nav-item ${activePage === "about" ? "active" : ""}`}>
-            <a class="nav-link" href="/about-us">ABOUT US</a>
-          </li>
-          <li class={`nav-item ${activePage === "contact" ? "active" : ""}`}>
-            <a class="nav-link" href="/get-in-touch">GET IN TOUCH</a>
-          </li>
-        </ul>
-      </div>
+  <div class="header-inner">
+    <a href="/" class="site-logo" aria-label="Altoby Home">
+      <Image src={logo} alt="Altoby Logo" height={32} class="site-logo-img" />
+    </a>
 
-      <div class="navbar-toggle">
-        <span></span>
-        <span></span>
-      </div>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a href="/#services" class:list={[{ active: activePage === "services" }]}
+        >Services</a
+      >
+      <a href="/#process" class:list={[{ active: activePage === "process" }]}
+        >Process</a
+      >
+      <a href="/#work" class:list={[{ active: activePage === "work" }]}>Work</a>
+      <a href="/industries" class:list={[{ active: activePage === "industries" }]}
+        >Industries</a
+      >
+      <a href="/#about" class:list={[{ active: activePage === "about" }]}
+        >Why Us</a
+      >
     </nav>
+
+    <a href="/contact" class="header-cta desktop-only">Get in Touch</a>
+
+    <button
+      class="menu-toggle"
+      id="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </header>
 
-<!-- Mobile Menu Popup -->
-<div class="header-popup">
-  <div class="container">
-    <div class="row md-column-reverse">
-      <div class="col-lg-6">
-        <div class="left-content">
-          <h3 class="d-none d-lg-block">Give us a holla!</h3>
-          <a href="/get-in-touch" class="clink md-arrow-link white md-mb-40"
-            >GET IN TOUCH</a
-          >
-          <div class="d-none d-lg-block">
-            <h5 class="md-mb-24">Say hello</h5>
-            <a class="hlink" href="tel:+2547173422473">+254 717 342 2473</a><br
-            />
-            <a href="mailto:hello@altoby.com" class="hlink">hello@altoby.com</a>
-          </div>
-          <ul class="socialLink">
-            <li>
-              <a href="https://www.instagram.com/altoby/" target="_blank"
-                ><img
-                  src="/assets/images/icons/instagram.svg"
-                  alt="instagram"
-                /></a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/company/altoby" target="_blank"
-                ><img
-                  src="/assets/images/icons/linkedin.svg"
-                  alt="linkedin"
-                /></a>
-            </li>
-            <li>
-              <a href="https://dribbble.com/altoby" target="_blank"
-                ><img
-                  src="/assets/images/icons/dribbble.svg"
-                  alt="dribbble"
-                /></a>
-            </li>
-            <li>
-              <a href="https://www.behance.net/altoby" target="_blank"
-                ><img
-                  src="/assets/images/icons/behance.svg"
-                  alt="behance"
-                /></a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/altoby/" target="_blank"
-                ><img
-                  src="/assets/images/icons/facebook.svg"
-                  alt="facebook"
-                /></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="row right-content">
-          <div class="col-12">
-            <ul class="quicklink">
-              <li class={activePage === "home" ? "active" : ""}>
-                <a href="/">Home</a>
-              </li>
-              <li class={activePage === "works" ? "active" : ""}>
-                <a href="/all-works">All Works</a>
-              </li>
-              <li class={activePage === "what-we-do" ? "active" : ""}>
-                <a href="/what-we-do">What We Do</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-6 col-lg-12">
-            <h5 class="md-mb-24">Other links</h5>
-            <ul class="otherLink">
-              <li><a href="/about-us">About Us</a></li>
-              <li>
-                <a href="/latest-news">Latest News</a><span class="linkSpan">NEW</span>
-              </li>
-              <li>
-                <a href="#">Careers</a><span class="linkSpan">COMING SOON</span>
-              </li>
-              <li><a href="/get-in-touch">GET IN TOUCH</a></li>
-            </ul>
-          </div>
-          <div class="col-6 d-block d-lg-none">
-            <h5>Say hello</h5>
-            <a href="tel:+2547173422473" class="hlink">+254 717 342 2473</a><br
-            />
-            <a href="mailto:hello@altoby.com" class="hlink">hello@altoby.com</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a href="/#services">Services</a>
+  <a href="/#process">Process</a>
+  <a href="/#work">Work</a>
+  <a href="/industries">Industries</a>
+  <a href="/#about">Why Us</a>
+  <a href="/contact" class="header-cta" style="margin-top: 16px;"
+    >Get in Touch</a
+  >
 </div>
+
+<script>
+  // Sticky header on scroll
+  const header = document.getElementById("site-header");
+  let lastScroll = 0;
+
+  function handleScroll() {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 50) {
+      header?.classList.add("scrolled");
+    } else {
+      header?.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  }
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  // Mobile menu toggle
+  const toggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.classList.toggle("active");
+    mobileMenu?.classList.toggle("open");
+    document.body.classList.toggle("no-scroll");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    mobileMenu?.setAttribute("aria-hidden", String(!isOpen));
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.classList.remove("active");
+      mobileMenu?.classList.remove("open");
+      document.body.classList.remove("no-scroll");
+      toggle?.setAttribute("aria-expanded", "false");
+      mobileMenu?.setAttribute("aria-hidden", "true");
+    });
+  });
+</script>

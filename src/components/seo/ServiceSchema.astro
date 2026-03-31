@@ -1,0 +1,33 @@
+---
+/**
+ * Service JSON-LD schema for each service pillar.
+ * Renders an array of Service schemas for rich results.
+ */
+import Schema from "./Schema.astro";
+import { SITE } from "../../data/seo";
+import { SERVICES } from "../../data/constants";
+
+const servicesData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Digital Growth Services",
+  "description": "Altoby's core service offerings for professional services businesses",
+  "numberOfItems": SERVICES.length,
+  "itemListElement": SERVICES.map((service, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Service",
+      "name": service.name,
+      "description": service.description,
+      "provider": { "@id": `${SITE.url}/#organization` },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Kenya",
+      },
+      "category": service.tags.join(", "),
+    },
+  })),
+};
+---
+<Schema data={servicesData} />

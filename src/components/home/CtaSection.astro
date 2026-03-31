@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import whatsappIcon from "../../assets/images/icons/whatsapp.png";
+import gmailIcon from "../../assets/images/icons/gmail.svg";
+---
+
+<section id="contact" class="cta-section cta-dark">
+  <div class="cta-inner container">
+    <div class="section-tag">Get Started</div>
+    <h2 class="section-heading">
+      Ready to stop <span class="accent">losing clients online?</span>
+    </h2>
+    <p>
+      Start with a free audit. We'll review your current digital presence and
+      tell you exactly what's holding you back — no sales pitch, no commitment
+      required.
+    </p>
+    <div class="cta-actions">
+      <a class="btn-cta btn-mail" href="/contact">
+        <Image
+          src={gmailIcon}
+          alt="Gmail"
+          height={20}
+          width={20}
+          class="btn-icon-img"
+        />
+        Book a Free Audit
+      </a>
+      <a
+        class="btn-cta btn-whatsapp"
+        href="https://wa.me/254717342473"
+        target="_blank"
+      >
+        <Image
+          src={whatsappIcon}
+          alt="WhatsApp"
+          height={20}
+          width={20}
+          class="btn-icon-img"
+        />
+        Chat on WhatsApp
+      </a>
+    </div>
+    <p class="cta-note">hello@altoby.com &nbsp;·&nbsp; Nairobi, Kenya</p>
+  </div>
+</section>

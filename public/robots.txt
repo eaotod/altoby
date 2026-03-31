@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block admin/API routes
+Disallow: /_actions/
+
+# Sitemap
+Sitemap: https://altoby.com/sitemap-index.xml

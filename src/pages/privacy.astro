@@ -1,0 +1,81 @@
+---
+import Base from "../layouts/Base.astro";
+import { PAGE_SEO } from "../data/seo";
+const seo = PAGE_SEO.privacy;
+const currentYear = new Date().getFullYear();
+---
+
+<Base 
+  title={seo.title}
+  description={seo.description}
+  noIndex={seo.noIndex}
+  activePage="privacy"
+>
+  <section class="legal-section">
+    <div class="legal-content">
+      <h1>Privacy Policy</h1>
+      <div class="legal-meta">Last Updated: March 31, {currentYear}</div>
+
+      <div class="legal-block">
+        <h2>1. Compliance with Kenyan Law</h2>
+        <p>Altoby Digital Studio ("Altoby," "we," "us," or "our") is committed to protecting the privacy and security of your personal data. This policy is aligned with the **Kenya Data Protection Act (2019)** and internationally recognized data protection principles.</p>
+        <p>We process personal data only where we have a lawful basis—primarily to perform our contract with you or to fulfill a legal obligation.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>2. Data We Collect</h2>
+        <p>We collect information necessary to provide professional digital services, including:</p>
+        <ul>
+          <li><strong>Identity & Contact:</strong> Names, business addresses, email, and phone/WhatsApp numbers.</li>
+          <li><strong>Project & Business Data:</strong> Content, strategy documents, and proprietary information shared for website builds or SEO.</li>
+          <li><strong>Technical & Usage Data:</strong> IP addresses, browser types, and navigation patterns collected via Google Analytics.</li>
+          <li><strong>Integrated CRM Data:</strong> Lead information captured via client websites and processed through our automation frameworks.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h2>3. Use of Your Data</h2>
+        <p>We process your data to:</p>
+        <ul>
+          <li>Deliver and support your web, SEO, and automation projects.</li>
+          <li>Manage client accounts, billing, and tax obligations under the laws of the Republic of Kenya.</li>
+          <li>Optimize automation workflows (e.g., lead routing and CRM syncing).</li>
+          <li>Communicate project updates and high-value service insights.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h2>4. Data Retention & Deletion</h2>
+        <p>We retain client data only for as long as necessary to fulfill our service agreement or comply with statutory requirements. Project backups and analytical data are typically purged 24 months after a project becomes inactive, unless a separate Service Level Agreement (SLA) is in place.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>5. Automation & Cross-Border Transfers</h2>
+        <p>To provide high-speed growth tools, we use third-party processors (including Zapier, Make, and Google Cloud). By using our services, you acknowledge that your data may be processed on secure servers located outside of Kenya.</p>
+        <p>We ensure all third-party partners maintain rigorous security standards equivalent to or exceeding local requirements.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>6. Security Measures</h2>
+        <p>We implement **"Privacy by Design"** principles. This includes encrypted communications (SSL/TLS), secure hosting environments, and restricted internal access to client project files.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>7. Your Rights</h2>
+        <p>Under the Kenya Data Protection Act 2019, you have the right to:</p>
+        <ul>
+          <li>Access your personal data.</li>
+          <li>Rectify inaccurate or incomplete information.</li>
+          <li>Request Erasure of your data (where applicable).</li>
+          <li>Object to processing or request data portability.</li>
+        </ul>
+        <p>To exercise these rights, contact our <strong>Data Lead</strong> at hello@altoby.com.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>8. Cookies</h2>
+        <p>We use essential and analytical cookies to optimize site performance. You may disable non-essential cookies via your browser settings without losing core site functionality.</p>
+      </div>
+    </div>
+  </section>
+</Base>

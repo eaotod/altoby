@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import { PAGE_SEO } from "../data/seo";
+const seo = PAGE_SEO.terms;
+const currentYear = new Date().getFullYear();
+---
+
+<Base 
+  title={seo.title}
+  description={seo.description}
+  noIndex={seo.noIndex}
+  activePage="terms"
+>
+  <section class="legal-section">
+    <div class="legal-content">
+      <h1>Terms & Conditions</h1>
+      <div class="legal-meta">Last Updated: March 31, {currentYear}</div>
+
+      <div class="legal-block">
+        <h2>1. Services & Scope</h2>
+        <p>Altoby Digital Studio ("the Studio," "we," "us," or "our") provides high-end digital growth services including web design, SEO, content strategy, and business automation. By engaging our services, you ("the Client") agree to be bound by these terms.</p>
+        <p>Any work outside the agreed Statement of Work (SOW) will be treated as <strong>"Additional Works"</strong> and quoted separately.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>2. Project Engagement & Payments</h2>
+        <h3>2.1 Retainer Services</h3>
+        <p>Monthly services (SEO, Content, Automation) are billed in advance. Payment is due within 7 days of the invoice date. We reserve the right to pause services if accounts are outstanding for more than 14 days.</p>
+        <h3>2.2 Project-Based Services</h3>
+        <p>Web design and development require a <strong>50% non-refundable commitment fee</strong> before work begins. The remaining 50% is due upon project completion and prior to live deployment or transfer of site ownership.</p>
+        <h3>2.3 Late Payments</h3>
+        <p>We reserve the right to charge a <strong>5% administrative fee</strong> on invoices remains unpaid 30 days past the due date.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>3. Intellectual Property & Portfolio</h2>
+        <h3>3.1 Ownership</h3>
+        <p>Upon final payment, the Client owns the intellectual property rights to the final deliverables (custom designs and written content).</p>
+        <h3>3.2 Studio Rights</h3>
+        <p>Altoby retains ownership of proprietary methodologies, reusable code modules, and internal frameworks.</p>
+        <h3>3.3 Attribution</h3>
+        <p>Unless otherwise agreed, Altoby reserves the right to feature the completed project in our professional portfolio and marketing materials.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>4. Client Responsibilities & Timelines</h2>
+        <p>To maintain momentum, the Client must provide necessary feedback, assets, and approvals <strong>within 5 business days</strong> of a request.</p>
+        <p>Significant delays in Client input may result in the project being moved to a <strong>"Parked" status</strong>, which may incur a restart fee.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>5. Limitation of Liability</h2>
+        <p>While we build for high performance, Altoby does not guarantee specific search rankings or conversion numbers, as these are subject to third-party algorithms. We are not liable for lost profits, data loss, or business interruptions caused by third-party platform changes (e.g., Google, hosting providers, or API updates).</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>6. Termination</h2>
+        <p>Either party may terminate a recurring service agreement with <strong>30 days' written notice</strong>. For fixed-price projects, the Client remains liable for the value of all work completed up to the date of termination.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>7. Governing Law</h2>
+        <p>These terms are governed by the laws of the Republic of Kenya. Any disputes shall be subject to the exclusive jurisdiction of the courts in Nairobi.</p>
+      </div>
+    </div>
+  </section>
+</Base>

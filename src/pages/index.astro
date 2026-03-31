@@ -1,30 +1,56 @@
 ---
 import Base from '../layouts/Base.astro';
-import Header from '../components/shared/Header.astro';
-import Footer from '../components/shared/Footer.astro';
 import HeroSection from '../components/home/HeroSection.astro';
-import WorkWithUsSection from '../components/home/WorkWithUsSection.astro';
 import MarqueeSection from '../components/home/MarqueeSection.astro';
-import WorksSection from '../components/home/WorksSection.astro';
-import AbilitiesSection from '../components/home/AbilitiesSection.astro';
-import WorkflowSection from '../components/home/WorkflowSection.astro';
-import CheerleadersSection from '../components/shared/CheerleadersSection.astro';
-import FeaturePressSection from '../components/home/FeaturePressSection.astro';
-import WildRideSection from '../components/shared/WildRideSection.astro';
+import ProblemSection from '../components/home/ProblemSection.astro';
+import ServicesSection from '../components/home/ServicesSection.astro';
+import ProcessSection from '../components/home/ProcessSection.astro';
+import CaseStudySection from '../components/home/CaseStudySection.astro';
+import WhyUsSection from '../components/home/WhyUsSection.astro';
+import CtaSection from '../components/home/CtaSection.astro';
+import LocalBusinessSchema from '../components/seo/LocalBusinessSchema.astro';
+import ServiceSchema from '../components/seo/ServiceSchema.astro';
+import { PAGE_SEO } from '../data/seo';
+
+const seo = PAGE_SEO.home;
 ---
 
 <Base
-  title="Altoby | Award-Winning Branding & UI/UX Design Studio"
-  description="Elevate your business potential with Altoby's accessible design solutions. We build impactful brands and user experiences to help you stand out in any industry."
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
   activePage="home"
 >
+  <LocalBusinessSchema slot="schema" />
+  <ServiceSchema slot="schema" />
+
   <HeroSection />
-  <WorkWithUsSection />
   <MarqueeSection />
-  <WorksSection />
-  <AbilitiesSection />
-  <WorkflowSection />
-  <CheerleadersSection />
-  <FeaturePressSection />
-  <WildRideSection />
+  <ProblemSection />
+  <ServicesSection />
+  <ProcessSection />
+  <CaseStudySection />
+  <WhyUsSection />
+  <CtaSection />
+
+  <script slot="scripts">
+    // Stagger reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.service-card, .step, .why-point, .case-card').forEach((el, i) => {
+      const element = el;
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(24px)';
+      element.style.transition = `opacity 0.55s ${i * 0.07}s ease, transform 0.55s ${i * 0.07}s ease`;
+      observer.observe(element);
+    });
+  </script>
 </Base>

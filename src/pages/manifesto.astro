@@ -1,0 +1,140 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaSection from "../components/home/CtaSection.astro";
+import { PAGE_SEO } from "../data/seo";
+const seo = PAGE_SEO.manifesto;
+const currentYear = new Date().getFullYear();
+---
+
+<Base
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  activePage="manifesto"
+>
+  <div class="narrative-hero">
+    <div class="container">
+      <div class="section-tag" style="justify-content: center;">Manifesto</div>
+      <h1>Conviction<br /><span class="accent">Over Convenience.</span></h1>
+      <p>
+        In {currentYear}, a firm’s digital presence is its most valuable asset.
+        It should be built with integrity, speed, and absolute clarity.
+      </p>
+    </div>
+  </div>
+
+  <section class="manifesto-intro container">
+    "Credibility is the new currency. In an era of noise and "vibe-coded" -
+    generic interfaces, the firms that win are the ones that embody professional
+    authority through every pixel and every interaction."
+  </section>
+
+  <section class="container">
+    <div class="manifesto-pillars">
+      <div class="pillar">
+        <h3>Depth Over Design</h3>
+        <p>
+          A beautiful site that does not convert is a failed asset. We
+          prioritize structural depth, high-speed performance, and semantic SEO
+          over superficial aesthetics.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Expert-Led Execution</h3>
+        <p>
+          We refuse to use account managers or project handoffs. You work
+          directly with the technical leads who are building your systems. No
+          layers, just results.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Radical Transparency</h3>
+        <p>
+          We speak business, not jargon. You deserve to understand exactly where
+          your growth is coming from, how your automation works, and what your
+          ROI is.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="no-list-section">
+    <div class="container">
+      <div class="no-list-grid">
+        <h2>What we<br />don't do.</h2>
+        <div class="no-items">
+          <div class="no-item">
+            <h4>No Performance Debt</h4>
+            <p>
+              In {currentYear}, we refuse to build on bloated, insecure
+              platforms that incur platform debt or slow down your growth.
+            </p>
+          </div>
+          <div class="no-item">
+            <h4>No Generic Templates</h4>
+            <p>
+              Every firm has a unique story. We build custom architectures that
+              reflect your authority, not a $49 theme.
+            </p>
+          </div>
+          <div class="no-item">
+            <h4>No Account Managers</h4>
+            <p>
+              We eliminate the middleman. Direct expert access is the only way
+              to maintain the fidelity of your brand.
+            </p>
+          </div>
+          <div class="no-item">
+            <h4>No Jargon</h4>
+            <p>
+              We don't hide behind tech speak. If it doesn't translate to
+              business outcomes, we don't build it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" style="text-align: center; margin-bottom: 120px;">
+    <div class="section-tag" style="justify-content: center;">
+      The {currentYear} Standard
+    </div>
+    <h2 class="section-heading">
+      Built to endure,<br /><span class="accent">Designed to win.</span>
+    </h2>
+    <p
+      style="max-width: 600px; margin: 0 auto; color: var(--color-text-secondary);"
+    >
+      The professional landscape is evolving. Altoby is here to ensure your firm
+      is at the forefront of that shift.
+    </p>
+  </section>
+
+  <CtaSection />
+
+  <script slot="scripts">
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = "1";
+            e.target.style.transform = "translateY(0)";
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+
+    document
+      .querySelectorAll(".pillar, .no-item, .manifesto-intro")
+      .forEach((el, i) => {
+        const element = el;
+        element.style.opacity = "0";
+        element.style.transform = "translateY(30px)";
+        element.style.transition = `opacity 0.8s ${i * 0.1}s var(--ease-out), transform 0.8s ${i * 0.1}s var(--ease-out)`;
+        observer.observe(element);
+      });
+  </script>
+</Base>

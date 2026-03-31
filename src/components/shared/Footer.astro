@@ -1,63 +1,143 @@
 ---
+import { Image } from "astro:assets";
+import footerLogo from "../../assets/logos/altoby.svg";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="footer">
+<footer class="site-footer">
   <div class="container">
-    <div class="footer-top">
-      <img class="flogo" src="/assets/images/logo.svg" alt="Altoby logo" />
-      <img class="frlogo" src="/assets/images/footerLogo.svg" alt="Altoby logo mark" />
-    </div>
-    <div class="row footer-middle">
-      <div class="col-lg-6 md-pb-32 md-mb-32 mb-border-light-black">
-        <h5>Drop in for a coffee</h5>
+    <div class="footer-grid">
+      <!-- Section 1: Brand -->
+      <div class="footer-column footer-brand">
+        <a class="footer-logo" href="/">
+          <Image src={footerLogo} alt="Altoby logo" height={28} />
+        </a>
         <p>
-          <address>
-            <a href="https://maps.app.goo.gl/rGuhY2CA8qtyoLB58" target="_blank">
-              House 12B, Floor 1, ABC Plaza<br />
-              Off Waiyaki Way, Westlands<br />
-              Nairobi 00800
-            </a>
-          </address>
+          Helping professional service firms build credible digital presences
+          that win high-value clients.
         </p>
-        <h5 class="space">Say hello</h5>
-        <a class="hlink" href="tel:+2547173422473">+254 717 342 2473</a><br />
-        <a href="mailto:hello@altoby.com" class="hlink">hello@altoby.com</a>
+        <div class="footer-socials">
+          <a
+            href="https://linkedin.com/company/altoby"
+            class="social-link"
+            aria-label="LinkedIn"
+            target="_blank"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+              ></path><rect width="4" height="12" x="2" y="9"></rect><circle
+                cx="4"
+                cy="4"
+                r="2"></circle></svg
+            >
+          </a>
+          <a
+            href="https://x.com/altoby"
+            class="social-link"
+            aria-label="X"
+            target="_blank"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path
+                d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg
+            >
+          </a>
+          <a
+            href="https://instagram.com/altoby"
+            class="social-link"
+            aria-label="Instagram"
+            target="_blank"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><rect width="20" height="20" x="2" y="2" rx="5" ry="5"
+              ></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+              ></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg
+            >
+          </a>
+        </div>
       </div>
-      <div class="col-lg-3 col-5">
-        <h5>Company</h5>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/all-works">All Works</a></li>
-          <li><a href="/what-we-do">What We Do</a></li>
-          <li><a href="/about-us">About Us</a></li>
-          <li><a href="/get-in-touch">GET IN TOUCH</a></li>
+
+      <!-- Section 2: Industries -->
+      <div class="footer-column">
+        <h4>Industries</h4>
+        <ul class="footer-nav">
+          <li><a href="/industries/law-firms">Law Firms</a></li>
+          <li><a href="/industries/consulting">Consulting Practices</a></li>
+          <li>
+            <a href="/industries/financial-services">Financial Services</a>
+          </li>
+          <li>
+            <a href="/industries/professional-services"
+              >Professional Services</a>
+          </li>
+          <li>
+            <a href="/industries/engineering">Engineering & Architecture</a>
+          </li>
         </ul>
       </div>
-      <div class="col-lg-3 col-7">
-        <h5>Discover</h5>
-        <ul>
-          <li><a href="/latest-news">Latest News</a><span class="linkSpan">NEW</span></li>
-          <li><a href="#">Careers</a><span class="linkSpan">COMING SOON</span></li>
-          <li><a href="/privacy-policy">Privacy policy</a></li>
+
+      <!-- Section 3: Services -->
+      <div class="footer-column">
+        <h4>Services</h4>
+        <ul class="footer-nav">
+          <li><a href="/services/web-design">High-End Web Design</a></li>
+          <li><a href="/services/content-strategy">Content Strategy</a></li>
+          <li><a href="/services/automation">CRM & Automation</a></li>
+          <li><a href="/services/fractional-cmo">Growth Frameworks</a></li>
+        </ul>
+      </div>
+
+      <!-- Section 4: Company -->
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul class="footer-nav">
+          <li><a href="/about">About Altoby</a></li>
+          <li><a href="/#process">Our Process</a></li>
+          <li><a href="/manifesto">Manifesto</a></li>
+          <li>
+            <a href="#">Careers <span class="coming-soon">Coming Soon</span></a>
+          </li>
+          <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
     </div>
-    <div class="row footer-bottom">
-      <div class="col-md-6">
-        <p>&copy; {currentYear} Altoby. All rights reserved.</p>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
       </div>
-      <div class="col-md-4">
-        <ul class="socialLink">
-          <li><a href="https://www.facebook.com/altoby/" target="_blank"><img src="/assets/images/icons/facebook.svg" alt="facebook" /></a></li>
-          <li><a href="https://dribbble.com/altoby" target="_blank"><img src="/assets/images/icons/dribbble.svg" alt="dribbble" /></a></li>
-          <li><a href="https://www.behance.net/altoby" target="_blank"><img src="/assets/images/icons/behance.svg" alt="behance" /></a></li>
-          <li><a href="https://www.instagram.com/altoby/" target="_blank"><img src="/assets/images/icons/instagram.svg" alt="instagram" /></a></li>
-          <li><a href="https://www.linkedin.com/company/altoby" target="_blank"><img src="/assets/images/icons/linkedin.svg" alt="linkedin" /></a></li>
-          <li><a href="https://twitter.com/altoby" target="_blank"><img src="/assets/images/icons/twitter.svg" alt="twitter" /></a></li>
-        </ul>
-      </div>
-      <a class="topToButton" href="#top"><img src="/assets/images/icons/upArrow.svg" alt="scroll to top" /></a>
+      <p class="footer-copy">
+        © {currentYear} Altoby Digital Studio. All rights reserved.
+      </p>
     </div>
   </div>
 </footer>

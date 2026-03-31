@@ -1,0 +1,56 @@
+---
+/**
+ * Organization + WebSite JSON-LD schema.
+ * Injected on every page via Base.astro for entity recognition.
+ * This is the equivalent of Yoast's "Organization" knowledge graph.
+ */
+import Schema from "./Schema.astro";
+import { SITE, BUSINESS } from "../../data/seo";
+
+const graphData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      "name": SITE.name,
+      "alternateName": BUSINESS.legalName,
+      "url": SITE.url,
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${SITE.url}/#logo`,
+        "url": SITE.logo,
+        "contentUrl": SITE.logo,
+        "caption": SITE.name,
+      },
+      "image": { "@id": `${SITE.url}/#logo` },
+      "telephone": BUSINESS.phone,
+      "email": BUSINESS.email,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": BUSINESS.address.city,
+        "addressRegion": BUSINESS.address.region,
+        "postalCode": BUSINESS.address.postalCode,
+        "addressCountry": BUSINESS.address.country,
+      },
+      "areaServed": BUSINESS.areaServed.map((area) => ({
+        "@type": "Place",
+        "name": area,
+      })),
+      "sameAs": BUSINESS.sameAs,
+      "knowsAbout": BUSINESS.knowsAbout,
+      "foundingDate": String(BUSINESS.foundingYear),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      "name": SITE.name,
+      "url": SITE.url,
+      "description": `${SITE.tagline}`,
+      "publisher": { "@id": `${SITE.url}/#organization` },
+      "inLanguage": "en",
+    },
+  ],
+};
+---
+<Schema data={graphData} />

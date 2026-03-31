@@ -1,0 +1,33 @@
+---
+/**
+ * FAQPage JSON-LD schema.
+ * Triggers Google's FAQ rich results in search snippets.
+ * Accepts an array of Q&A pairs as props.
+ */
+import Schema from "./Schema.astro";
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  faqs: FAQ[];
+}
+
+const { faqs } = Astro.props;
+
+const faqData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer,
+    },
+  })),
+};
+---
+<Schema data={faqData} />

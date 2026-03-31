@@ -1,0 +1,59 @@
+---
+/**
+ * ProfessionalService (LocalBusiness subtype) JSON-LD schema.
+ * Connects website to Google Business Profile for local SEO.
+ * Inject on homepage and contact page.
+ */
+import Schema from "./Schema.astro";
+import { SITE, BUSINESS } from "../../data/seo";
+import { SERVICES } from "../../data/constants";
+
+const localBusinessData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE.url}/#localbusiness`,
+  "name": SITE.name,
+  "alternateName": BUSINESS.legalName,
+  "description": "Digital growth studio helping law firms, consultancies, and professional services businesses build credible digital presence through web design, SEO, and automation.",
+  "url": SITE.url,
+  "telephone": BUSINESS.phone,
+  "email": BUSINESS.email,
+  "logo": SITE.logo,
+  "image": SITE.ogImage,
+  "priceRange": BUSINESS.priceRange,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": BUSINESS.address.city,
+    "addressRegion": BUSINESS.address.region,
+    "postalCode": BUSINESS.address.postalCode,
+    "addressCountry": BUSINESS.address.country,
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": BUSINESS.geo.latitude,
+    "longitude": BUSINESS.geo.longitude,
+  },
+  "hasMap": BUSINESS.googleMapsUrl,
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "08:00",
+    "closes": "18:00",
+  },
+  "areaServed": BUSINESS.areaServed.map((area) => ({
+    "@type": "Place",
+    "name": area,
+  })),
+  "sameAs": BUSINESS.sameAs,
+  "makesOffer": SERVICES.map((service) => ({
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": service.name,
+      "description": service.description,
+    },
+  })),
+  "isPartOf": { "@id": `${SITE.url}/#website` },
+};
+---
+<Schema data={localBusinessData} />

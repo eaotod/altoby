@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaSection from "../components/home/CtaSection.astro";
+import { PAGE_SEO } from "../data/seo";
+const seo = PAGE_SEO.about;
+const currentYear = new Date().getFullYear();
+---
+
+<Base 
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  activePage="about"
+>
+  <div class="narrative-hero">
+    <div class="container">
+      <div class="section-tag" style="justify-content: center;">Our Story</div>
+      <h1>Designed for<br/><span class="accent">The New Era.</span></h1>
+      <p>We didn't set out to build another agency. We set out to build a partner for the firms that drive the professional economy.</p>
+    </div>
+  </div>
+
+  <section class="story-section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-text">
+          <h2>The Agency Problem</h2>
+          <p>Traditional agencies are built for volume, not depth. They win you over with senior talent, then hand your most valuable digital assets to juniors. The result? Templates that look generic and automations that break when you need them most.</p>
+          <p>At Altoby, we flipped the script. We stay small so we can stay close. You work directly with the experts building your growth systems — from day one to launch.</p>
+        </div>
+        <div class="story-visual">
+          <div class="orrery" style="transform: scale(3.5); opacity: 0.15;">
+            <div class="globe"></div>
+            <div class="ring ring-1 ring-back"></div>
+            <div class="ring-front ring-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-section" style="background: rgba(0,0,0,0.02);">
+    <div class="container">
+      <div class="story-grid reverse">
+        <div class="story-text">
+          <h2>The Nairobi Advantage</h2>
+          <p>Based in the heart of East Africa's tech hub, we bridge the gap between high-tier Nairobi engineering and global professional standards. We understand the nuances of the local market while executing at a level that wins in London, New York, and beyond.</p>
+          <p>Whether you're targeting the Kenyan diaspora or building a local powerhouse, we provide the technical depth and cultural insight to make it happen.</p>
+        </div>
+        <div class="story-visual" style="background: white;">
+           <div style="font-family: var(--font-display); font-size: 8rem; font-weight: 700; color: var(--color-accent); opacity: 0.1;">NBO</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-text">
+          <h2>Technical Depth by Default</h2>
+          <p>In {currentYear}, a website is no longer a static brochure; it is the heartbeat of your firm's operations. We build with modern frameworks that ensure your presence is fast, secure, and ready for whatever's next.</p>
+          <p>From AI-driven client intake to automated follow-up sequences, we build the systems that work while you sleep. That is the Altoby standard.</p>
+        </div>
+        <div class="story-visual">
+          <div style="padding: 40px; text-align: center;">
+            <div style="font-size: 3rem; font-weight: 700; margin-bottom: 20px;">99.9</div>
+            <div class="section-tag" style="justify-content: center;">Uptime & Execution</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection />
+
+  <script slot="scripts">
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.story-text, .story-visual').forEach((el, i) => {
+      const element = el;
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(30px)';
+      element.style.transition = `opacity 0.8s ${i * 0.1}s var(--ease-out), transform 0.8s ${i * 0.1}s var(--ease-out)`;
+      observer.observe(element);
+    });
+  </script>
+</Base>

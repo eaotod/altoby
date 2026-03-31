@@ -1,15 +1,14 @@
-<!-- Animated Logos / Marquee Section - exact legacy HTML from index.php lines 667-696 -->
-<section class="antimated-logos-section">
-  <div class="container-fuild">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="antimated-logos-left">
-          <img src="/assets/images/home/features-scroll.svg" alt="fun" />
-        </div>
-        <div class="antimated-logos-right">
-          <img src="/assets/images/home/features-scroll.svg" alt="fun" />
-        </div>
-      </div>
-    </div>
+---
+import { INDUSTRIES } from '../../data/constants';
+---
+<div class="marquee-strip">
+  <div class="marquee-track">
+    {INDUSTRIES.filter(i => i.value !== 'Other Professional Services').map((industry) => (
+      <span class={`marquee-item${industry.highlight ? ' highlight' : ''}`}>{industry.label}</span>
+    ))}
+    {/* duplicate for seamless loop */}
+    {INDUSTRIES.filter(i => i.value !== 'Other Professional Services').map((industry) => (
+      <span class={`marquee-item${industry.highlight ? ' highlight' : ''}`}>{industry.label}</span>
+    ))}
   </div>
-</section>
+</div>
