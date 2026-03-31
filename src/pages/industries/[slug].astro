@@ -29,36 +29,58 @@ const seo = getIndustryPageSEO(industry);
 >
   <LocalBusinessSchema slot="schema" />
 
-  <div class="container" style="padding-top: 4rem;">
-    <Breadcrumbs items={[{ label: "Industries", href: "/#industries" }, { label: industry.label }]} />
-  </div>
-
-  <DynamicHero 
-    title={industry.label} 
-    tagline={industry.tagline} 
-    emoji="🏛️"
-  >
+  <DynamicHero title={industry.label} tagline={industry.tagline} emoji="🏛️">
+    <Breadcrumbs
+      slot="top"
+      items={[
+        { label: "Industries", href: "/#industries" },
+        { label: industry.label },
+      ]}
+    />
     {industry.fullDescription}
   </DynamicHero>
 
-  {industry.keyBenefits && industry.keyBenefits.length > 0 && (
-    <FeatureHighlight 
-      title="Industry Focus" 
-      subtitle={`Why top ${industry.label.toLowerCase()} firms partner with Altoby.`}
-      features={industry.keyBenefits}
-    />
-  )}
+  {
+    industry.keyBenefits && industry.keyBenefits.length > 0 && (
+      <FeatureHighlight
+        title="Industry Focus"
+        subtitle={`Why top ${industry.label.toLowerCase()} firms partner with Altoby.`}
+        features={industry.keyBenefits}
+      />
+    )
+  }
 
   <section class="booking-section" id="booking-area">
     <div class="container">
       <div class="booking-grid">
         <div class="booking-info">
           <div class="section-tag">Industry Specialist</div>
-          <h2>Transforming <br/><span class="accent">{industry.label}.</span></h2>
-          <p>We understand the unique digital challenges of the {industry.label.toLowerCase()} sector. Book a 20-minute audit to discuss your firm's specific growth roadmap.</p>
-          
+          <h2>
+            Transforming <br /><span class="accent">{industry.label}.</span>
+          </h2>
+          <p>
+            We understand the unique digital challenges of the {
+              industry.label.toLowerCase()
+            } sector. Book a 20-minute audit to discuss your firm's specific growth
+            roadmap.
+          </p>
+
           <div class="industry-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-check-circle-2"
+              ><path
+                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+              ></path><path d="m9 12 2 2 4-4"></path></svg
+            >
             <span>Tailored strategy for {industry.label}</span>
           </div>
         </div>
@@ -119,7 +141,6 @@ const seo = getIndustryPageSEO(industry);
     border: 1px solid var(--color-border);
     border-radius: 1.5rem;
     padding: 1rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
   }
 
   @media (max-width: 992px) {

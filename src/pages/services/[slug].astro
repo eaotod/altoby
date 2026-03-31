@@ -29,20 +29,23 @@ const seo = getServicePageSEO(service);
 >
   <ServiceSchema slot="schema" />
 
-  <div class="container" style="padding-top: 4rem;">
-    <Breadcrumbs items={[{ label: "Services", href: "/#services" }, { label: service.name }]} />
-  </div>
-
-  <DynamicHero 
-    title={service.name} 
-    tagline={service.tagline} 
+  <DynamicHero
+    title={service.name}
+    tagline={service.tagline}
     emoji={service.emoji}
   >
+    <Breadcrumbs
+      slot="top"
+      items={[
+        { label: "Services", href: "/#services" },
+        { label: service.name },
+      ]}
+    />
     {service.fullDescription}
   </DynamicHero>
 
-  <FeatureHighlight 
-    title="Core Value" 
+  <FeatureHighlight
+    title="Core Value"
     subtitle={`How our ${service.name} drives your growth.`}
     features={service.keyBenefits}
   />
@@ -52,13 +55,20 @@ const seo = getServicePageSEO(service);
       <div class="booking-grid">
         <div class="booking-info">
           <div class="section-tag">Next Steps</div>
-          <h2>Ready to launch your <br/><span class="accent">Digital Authority?</span></h2>
-          <p>Book a free 20-minute audit of your firm's current digital gaps. No sales talk, just a technical roadmap for {service.name.toLowerCase()}.</p>
-          
+          <h2>
+            Ready to launch your <br /><span class="accent"
+              >Digital Authority?</span
+            >
+          </h2>
+          <p>
+            Book a free 20-minute audit of your firm's current digital gaps. No
+            sales talk, just a technical roadmap for {
+              service.name.toLowerCase()
+            }.
+          </p>
+
           <div class="service-tags">
-            {service.tags.map(tag => (
-              <span class="tag">{tag}</span>
-            ))}
+            {service.tags.map((tag) => <span class="tag">{tag}</span>)}
           </div>
         </div>
         <div class="booking-card">
@@ -119,7 +129,6 @@ const seo = getServicePageSEO(service);
     border: 1px solid var(--color-border);
     border-radius: 1.5rem;
     padding: 1rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
   }
 
   @media (max-width: 992px) {
