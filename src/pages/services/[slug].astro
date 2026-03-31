@@ -1,0 +1,131 @@
+---
+import Base from "../../layouts/Base.astro";
+import { SERVICES } from "../../data/constants";
+import { getServicePageSEO } from "../../data/seo";
+import Breadcrumbs from "../../components/shared/Breadcrumbs.astro";
+import DynamicHero from "../../components/shared/DynamicHero.astro";
+import FeatureHighlight from "../../components/shared/FeatureHighlight.astro";
+import ContactForm from "../../components/forms/ContactForm";
+import ServiceSchema from "../../components/seo/ServiceSchema.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return SERVICES.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const seo = getServicePageSEO(service);
+---
+
+<Base
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  activePage="services"
+>
+  <ServiceSchema slot="schema" />
+
+  <div class="container" style="padding-top: 4rem;">
+    <Breadcrumbs items={[{ label: "Services", href: "/#services" }, { label: service.name }]} />
+  </div>
+
+  <DynamicHero 
+    title={service.name} 
+    tagline={service.tagline} 
+    emoji={service.emoji}
+  >
+    {service.fullDescription}
+  </DynamicHero>
+
+  <FeatureHighlight 
+    title="Core Value" 
+    subtitle={`How our ${service.name} drives your growth.`}
+    features={service.keyBenefits}
+  />
+
+  <section class="booking-section" id="booking-area">
+    <div class="container">
+      <div class="booking-grid">
+        <div class="booking-info">
+          <div class="section-tag">Next Steps</div>
+          <h2>Ready to launch your <br/><span class="accent">Digital Authority?</span></h2>
+          <p>Book a free 20-minute audit of your firm's current digital gaps. No sales talk, just a technical roadmap for {service.name.toLowerCase()}.</p>
+          
+          <div class="service-tags">
+            {service.tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+        <div class="booking-card">
+          <ContactForm client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .booking-section {
+    padding: 8rem 0;
+    background: var(--color-bg-alt);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+
+  .booking-info p {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    max-width: 500px;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .tag {
+    padding: 0.5rem 1rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .booking-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 992px) {
+    .booking-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+  }
+</style>

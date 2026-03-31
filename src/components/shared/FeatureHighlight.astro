@@ -1,0 +1,87 @@
+---
+interface Feature {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  features: Feature[];
+}
+
+const { title, subtitle, features } = Astro.props;
+---
+
+<section class="feature-highlight">
+  <div class="container">
+    <div class="section-tag" style="justify-content: center;">{title}</div>
+    <h2 class="section-heading" style="text-align: center;">{subtitle}</h2>
+
+    <div class="feature-grid">
+      {
+        features.map((feature, i) => (
+          <div class="feature-card">
+            <span class="feature-number">{String(i + 1).padStart(2, "0")}</span>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-highlight {
+    padding: 6rem 0;
+    background: var(--color-bg);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .feature-card {
+    padding: 2.5rem;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-accent);
+  }
+
+  .feature-number {
+    display: block;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+</style>

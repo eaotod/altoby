@@ -1,4 +1,5 @@
 ---
+import { SERVICES } from "../../data/constants";
 ---
 <section id="services">
   <div class="services-header container">
@@ -13,76 +14,64 @@
   </div>
 
   <div class="services-grid container">
-    <!-- Service 1 -->
-    <div class="service-card" data-num="01">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
-      </div>
-      <div class="service-title">Web Design & Development</div>
-      <p class="service-desc">
-        Custom-built, fast, and mobile-first websites that represent your firm the way it deserves —
-        no generic templates, no bloated WordPress plugins. From redesigns to new builds.
-      </p>
-      <div class="service-tags">
-        <span class="service-tag">Custom Brand Design</span>
-        <span class="service-tag">High-Speed Performance</span>
-        <span class="service-tag">Mobile-First Experience</span>
-        <span class="service-tag">Scalable Architecture</span>
-      </div>
-    </div>
+    {SERVICES.map((service, index) => (
+      <div class="service-card" data-num={String(index + 1).padStart(2, '0')}>
+        <div class="service-icon">
+          {service.tier === 1 && (
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+          )}
+          {service.tier === 2 && (
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          )}
+          {service.tier === 3 && (
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          )}
+          {service.tier === 4 && (
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="6" height="6"/><rect x="16" y="3" width="6" height="6"/><rect x="9" y="15" width="6" height="6"/><path d="M5 9v4h14V9M12 13v2"/></svg>
+          )}
+        </div>
+        <div class="service-title">{service.name}</div>
+        <p class="service-desc">{service.description}</p>
+        
+        <div class="service-tags">
+          {service.tags.map(tag => (
+            <span class="service-tag">{tag}</span>
+          ))}
+        </div>
 
-    <!-- Service 2 -->
-    <div class="service-card" data-num="02">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <a href={`/services/${service.slug}`} class="service-link">
+          View Details
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+        </a>
       </div>
-      <div class="service-title">Google Business Profile</div>
-      <p class="service-desc">
-        Full GBP setup, optimisation, and ongoing management. Get your firm showing in local searches,
-        Google Maps, and the sidebar when potential clients search your services.
-      </p>
-      <div class="service-tags">
-        <span class="service-tag">Search & Maps Optimization</span>
-        <span class="service-tag">Local SEO Strategy</span>
-        <span class="service-tag">Reputation & Review Management</span>
-        <span class="service-tag">Monthly Performance Updates</span>
-      </div>
-    </div>
-
-    <!-- Service 3 -->
-    <div class="service-card" data-num="03">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="service-title">Content & SEO Writing</div>
-      <p class="service-desc">
-        Blog posts, LinkedIn articles, and service page copy written to rank and convert.
-        Consistent content builds authority — especially for firms targeting diaspora or niche clients.
-      </p>
-      <div class="service-tags">
-        <span class="service-tag">Expert Article Writing</span>
-        <span class="service-tag">LinkedIn Authority Building</span>
-        <span class="service-tag">Search Engine Optimization</span>
-        <span class="service-tag">Content Lifecycle Management</span>
-      </div>
-    </div>
-
-    <!-- Service 4 -->
-    <div class="service-card" data-num="04">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="6" height="6"/><rect x="16" y="3" width="6" height="6"/><rect x="9" y="15" width="6" height="6"/><path d="M5 9v4h14V9M12 13v2"/></svg>
-      </div>
-      <div class="service-title">Automation & AI Tooling</div>
-      <p class="service-desc">
-        Custom automation workflows and AI-powered tools that eliminate repetitive tasks —
-        lead follow-up, form routing, report generation, and more. Built to your exact process.
-      </p>
-      <div class="service-tags">
-        <span class="service-tag">Lead Capture Automation</span>
-        <span class="service-tag">Workflow Optimization</span>
-        <span class="service-tag">AI-Driven Client Inbound</span>
-        <span class="service-tag">CRM & Tool Integration</span>
-      </div>
-    </div>
+    ))}
   </div>
 </section>
+
+<style>
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: gap 0.2s ease;
+  }
+
+  .service-link:hover {
+    gap: 0.75rem;
+  }
+
+  .service-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .service-link:hover svg {
+    transform: translate(2px, -2px);
+  }
+</style>

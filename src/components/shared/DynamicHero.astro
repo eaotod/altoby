@@ -1,0 +1,106 @@
+---
+interface Props {
+  title: string;
+  tagline: string;
+  emoji?: string;
+  gradient?: string;
+}
+
+const {
+  title,
+  tagline,
+  emoji = "🚀",
+  gradient = "from-primary to-accent",
+} = Astro.props;
+---
+
+<section class="dynamic-hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">{emoji} {title}</div>
+      <h1>{tagline}</h1>
+      <p class="hero-description">
+        <slot />
+      </p>
+      <div class="hero-actions">
+        <a href="#booking-area" class="btn btn-primary">Book a Consultation</a>
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-background"></div>
+</section>
+
+<style>
+  .dynamic-hero {
+    position: relative;
+    padding: 8rem 0 6rem;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hero-background {
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 69, 0, 0.05) 0%,
+      transparent 70%
+    );
+    filter: blur(80px);
+    z-index: 1;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 768px) {
+    .dynamic-hero {
+      padding: 6rem 0 4rem;
+    }
+  }
+</style>

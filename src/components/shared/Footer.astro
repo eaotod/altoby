@@ -1,7 +1,16 @@
 ---
 import { Image } from "astro:assets";
 import footerLogo from "../../assets/logos/altoby.svg";
+import { SERVICES, INDUSTRIES } from "../../data/constants";
+
 const currentYear = new Date().getFullYear();
+
+// Get top 5 highlighted industries or first 5
+const footerIndustries = INDUSTRIES.filter(i => i.highlight).slice(0, 5);
+if (footerIndustries.length < 5) {
+  const others = INDUSTRIES.filter(i => !i.highlight).slice(0, 5 - footerIndustries.length);
+  footerIndustries.push(...others);
+}
 ---
 
 <footer class="site-footer">
@@ -89,18 +98,9 @@ const currentYear = new Date().getFullYear();
       <div class="footer-column">
         <h4>Industries</h4>
         <ul class="footer-nav">
-          <li><a href="/industries/law-firms">Law Firms</a></li>
-          <li><a href="/industries/consulting">Consulting Practices</a></li>
-          <li>
-            <a href="/industries/financial-services">Financial Services</a>
-          </li>
-          <li>
-            <a href="/industries/professional-services"
-              >Professional Services</a>
-          </li>
-          <li>
-            <a href="/industries/engineering">Engineering & Architecture</a>
-          </li>
+          {footerIndustries.map((industry) => (
+            <li><a href={`/industries/${industry.slug}`}>{industry.label}</a></li>
+          ))}
         </ul>
       </div>
 
@@ -108,10 +108,9 @@ const currentYear = new Date().getFullYear();
       <div class="footer-column">
         <h4>Services</h4>
         <ul class="footer-nav">
-          <li><a href="/services/web-design">High-End Web Design</a></li>
-          <li><a href="/services/content-strategy">Content Strategy</a></li>
-          <li><a href="/services/automation">CRM & Automation</a></li>
-          <li><a href="/services/fractional-cmo">Growth Frameworks</a></li>
+          {SERVICES.map((service) => (
+            <li><a href={`/services/${service.slug}`}>{service.name}</a></li>
+          ))}
         </ul>
       </div>
 

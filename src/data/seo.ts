@@ -197,3 +197,31 @@ export const INDUSTRY_KEYWORDS = {
     secondary: ["proptech web design nairobi", "property listing website", "real estate digital marketing kenya"],
   },
 } as const;
+
+// ─── DYNAMIC PAGE SEO GENERATORS ───────────────────────
+
+/**
+ * Generates SEO metadata for dynamic service pages.
+ */
+export function getServicePageSEO(service: { name: string; tagline: string; description: string; slug: string }): PageSEO {
+  const keywords = Object.values(SERVICE_KEYWORDS).find(k => service.name.toLowerCase().includes(k.primary.split(' ')[0].toLowerCase()));
+  
+  return {
+    title: `${service.name} | Altoby — Digital Growth`,
+    description: service.tagline + " " + service.description,
+    keywords: keywords ? [keywords.primary, ...keywords.secondary].join(", ") : undefined,
+  };
+}
+
+/**
+ * Generates SEO metadata for dynamic industry pages.
+ */
+export function getIndustryPageSEO(industry: { label: string; tagline: string; fullDescription: string }): PageSEO {
+  const keywords = Object.values(INDUSTRY_KEYWORDS).find(k => industry.label.toLowerCase().includes(k.primary.split(' ')[2].toLowerCase()));
+
+  return {
+    title: `${industry.label} Digital Partner | Altoby`,
+    description: industry.tagline + " " + industry.fullDescription.substring(0, 120) + "...",
+    keywords: keywords ? [keywords.primary, ...keywords.secondary].join(", ") : undefined,
+  };
+}
