@@ -1,7 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import heroGif from "../../assets/images/hero1.gif";
-// import heroImg from "../../assets/images/hero2.gif";
+import QuickAudit from "../shared/QuickAudit.astro";
 ---
 
 <section class="hero" id="hero">
@@ -110,19 +108,7 @@ import heroGif from "../../assets/images/hero1.gif";
   </p>
 
   <!-- CTA -->
-  <a href="/contact" class="hero-cta" id="hero-cta">
-    Book a Free Audit
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="2"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-    </svg>
-  </a>
+  <div class="hero-cta-wrapper">
+    <QuickAudit />
+  </div>
 </section>

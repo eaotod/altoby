@@ -1,0 +1,405 @@
+---
+import { CONTACT } from "../../data/constants";
+import { Image } from "astro:assets";
+import whatsappIcon from "../../assets/images/icons/whatsapp.png";
+import gmailIcon from "../../assets/images/icons/gmail.svg";
+
+/**
+ * QuickAudit Component
+ * A high-fidelity, morphing interaction for capturing leads.
+ */
+---
+
+<div class="quick-audit-container" id="quick-audit">
+  <!-- Initial Button -->
+  <button class="audit-btn-initial" id="audit-trigger">
+    Book a Free Audit
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+    </svg>
+  </button>
+
+  <!-- Expanded State: Input -->
+  <div class="audit-expanded-input hidden" id="audit-input-step">
+    <div class="input-wrapper">
+      <input 
+        type="text" 
+        id="audit-url-input" 
+        placeholder="Enter your Website URL (e.g. firm.com)"
+        autocomplete="off"
+      />
+      <button class="input-next-btn" id="audit-url-next">
+        Next
+      </button>
+    </div>
+    <button class="no-website-toggle" id="no-website-btn">
+      I don't have a website yet
+    </button>
+  </div>
+
+  <!-- Final State: Branching CTAs -->
+  <div class="audit-final-actions hidden" id="audit-final-step">
+    <p class="final-msg" id="final-msg">Where should we send your audit?</p>
+    <div class="action-grid">
+      <a href="#" class="action-btn premium-btn whatsapp" id="whatsapp-link" target="_blank">
+        <Image src={whatsappIcon} alt="WhatsApp" width={24} height={24} class="icon-img" />
+        WhatsApp
+      </a>
+      <a href="#" class="action-btn premium-btn email" id="email-link">
+        <Image src={gmailIcon} alt="Gmail" width={24} height={24} class="icon-img" />
+        Email
+      </a>
+    </div>
+    <button class="back-btn" id="audit-back-btn">← Back</button>
+  </div>
+</div>
+
+<style>
+  .quick-audit-container {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.4s var(--ease-spring);
+    min-height: 56px;
+    z-index: 10;
+  }
+
+  /* --- Initial Button --- */
+  .audit-btn-initial {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    border-radius: var(--radius-pill);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease-spring), background 0.3s ease, padding 0.4s var(--ease-spring);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .audit-btn-initial:hover {
+    transform: scale(1.05);
+    background: #2a2a2a;
+    padding-right: 44px;
+  }
+
+  .audit-btn-initial svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  .audit-btn-initial:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* --- Input Step --- */
+  .audit-expanded-input {
+    width: 380px;
+    max-width: 90vw;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(26, 26, 26, 0.05);
+    padding: 6px;
+    border-radius: var(--radius-pill);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    animation: slideUp 0.5s var(--ease-spring) both;
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+  }
+
+  #audit-url-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 24px;
+    font-size: 14px;
+    color: var(--color-text);
+    outline: none;
+    font-family: inherit;
+    letter-spacing: -0.01em;
+  }
+
+  #audit-url-input::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+  }
+
+  .input-next-btn {
+    background: var(--color-dark);
+    color: white;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s var(--ease-spring);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .input-next-btn:hover {
+    transform: scale(1.02);
+    background: var(--color-accent);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 8px rgba(228, 87, 46, 0.2);
+  }
+
+  .no-website-toggle {
+    font-size: 9px;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    padding: 4px 10px 10px;
+    opacity: 0.5;
+    transition: opacity 0.3s, color 0.3s;
+    cursor: pointer;
+    align-self: center;
+  }
+
+  .no-website-toggle:hover {
+    opacity: 1;
+    color: var(--color-accent);
+  }
+
+  /* --- Final Actions --- */
+  .audit-final-actions {
+    width: 440px;
+    max-width: 95vw;
+    padding: 24px 32px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(26, 26, 26, 0.05);
+    border-radius: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+    animation: scaleIn 0.5s var(--ease-spring) both;
+    text-align: center;
+  }
+
+  .final-msg {
+    font-family: var(--font-display), sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+
+  .action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .premium-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s var(--ease-spring);
+    border: 1px solid rgba(26, 26, 26, 0.05);
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%), rgba(26, 26, 26, 0.03);
+    color: var(--color-text);
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .premium-btn .icon-img {
+    width: 20px;
+    height: 20px;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08));
+    transition: transform 0.4s var(--ease-spring);
+  }
+
+  /* WhatsApp Premium Style */
+  .premium-btn.whatsapp {
+    background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%), rgba(37, 211, 102, 0.08);
+    border-color: rgba(37, 211, 102, 0.15);
+    color: #128C7E;
+  }
+
+  .premium-btn.whatsapp:hover {
+    background: #25D366;
+    color: white;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.15);
+    border-color: rgba(37, 211, 102, 0.2);
+  }
+
+  /* Email Premium Style */
+  .premium-btn.email {
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%), rgba(26, 26, 26, 0.04);
+    border-color: rgba(26, 26, 26, 0.1);
+    color: var(--color-text);
+  }
+
+  .premium-btn.email:hover {
+    background: var(--color-dark);
+    color: white;
+    box-shadow: 0 8px 20px rgba(26, 26, 26, 0.15);
+    border-color: transparent;
+  }
+
+  .premium-btn:hover {
+    transform: translateY(-4px);
+  }
+
+  .premium-btn:hover .icon-img {
+    transform: scale(1.1) rotate(-5deg);
+    filter: brightness(0) invert(1); /* Turn icons white on hover */
+  }
+
+  /* Shimmer Effect for Premium Feel */
+  .premium-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    opacity: 0;
+  }
+
+  .premium-btn:hover::after {
+    left: 100%;
+    opacity: 1;
+  }
+
+  .back-btn {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  /* --- Helpers --- */
+  .hidden {
+    display: none !important;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @media screen and (max-width: 480px) {
+    .action-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ whatsappBase: CONTACT.whatsappUrl, emailBase: CONTACT.email }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('audit-trigger');
+    const inputStep = document.getElementById('audit-input-step');
+    const finalStep = document.getElementById('audit-final-step');
+    const urlInput = document.getElementById('audit-url-input');
+    const nextBtn = document.getElementById('audit-url-next');
+    const noWebsiteBtn = document.getElementById('no-website-btn');
+    const backBtn = document.getElementById('audit-back-btn');
+    const finalMsg = document.getElementById('final-msg');
+    
+    const whatsappLink = document.getElementById('whatsapp-link');
+    const emailLink = document.getElementById('email-link');
+
+    let currentUrl = '';
+
+    // Step 1 -> Step 2
+    trigger.addEventListener('click', () => {
+      trigger.classList.add('hidden');
+      inputStep.classList.remove('hidden');
+      urlInput.focus();
+    });
+
+    // Step 2 -> Step 3 (Audit Path)
+    nextBtn.addEventListener('click', () => {
+      currentUrl = urlInput.value.trim() || 'my website';
+      showFinalStep(true);
+    });
+
+    urlInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        currentUrl = urlInput.value.trim() || 'my website';
+        showFinalStep(true);
+      }
+    });
+
+    // Step 2 -> Step 3 (No Website Path)
+    noWebsiteBtn.addEventListener('click', () => {
+      currentUrl = null;
+      showFinalStep(false);
+    });
+
+    // Back Button
+    backBtn.addEventListener('click', () => {
+      finalStep.classList.add('hidden');
+      inputStep.classList.remove('hidden');
+    });
+
+    function showFinalStep(isAudit) {
+      inputStep.classList.add('hidden');
+      finalStep.classList.remove('hidden');
+
+      if (isAudit) {
+        finalMsg.textContent = "Where should we send your audit?";
+        
+        // WhatsApp link building
+        const waMsg = encodeURIComponent(`Hi Altoby, I just requested a free audit for ${currentUrl}. I'd like to get the report here.`);
+        whatsappLink.href = `${whatsappBase}?text=${waMsg}`;
+
+        // Email link building
+        const mailSubject = encodeURIComponent(`Website Audit Request: ${currentUrl}`);
+        const mailBody = encodeURIComponent(`Hi Altoby Team,\n\nI just requested a free audit for ${currentUrl} via the website. Looking forward to the results!`);
+        emailLink.href = `mailto:${emailBase}?subject=${mailSubject}&body=${mailBody}`;
+      } else {
+        finalMsg.textContent = "Let's build your new platform.";
+        
+        const waMsg = encodeURIComponent("Hi Altoby, I don't have a website yet and I'm looking to build a new one for my firm. Can we chat?");
+        whatsappLink.href = `${whatsappBase}?text=${waMsg}`;
+
+        const mailSubject = encodeURIComponent("New Project Design Inquiry");
+        const mailBody = encodeURIComponent("Hi Altoby Team,\n\nI'm looking to build a new website for my firm. I'd like to discuss the design and development process.");
+        emailLink.href = `mailto:${emailBase}?subject=${mailSubject}&body=${mailBody}`;
+      }
+    }
+  });
+</script>
