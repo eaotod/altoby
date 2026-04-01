@@ -126,6 +126,13 @@ export const PAGE_SEO: Record<string, PageSEO> = {
       "Terms and conditions governing the use of Altoby Digital Studio's services and website.",
     noIndex: true,
   },
+  industries: {
+    title: "Industries We Serve | Altoby — Specialist Digital Growth",
+    description:
+      "Altoby provides custom web design, SEO, and automation solutions tailored for high-stakes professional sectors including Legal, Finance, Healthcare, and Real Estate in Nairobi and beyond.",
+    keywords:
+      "law firm web design, fintech web development, healthcare digital marketing, real estate proptech kenya, professional services industries",
+  },
 } as const;
 
 // ─── SERVICE KEYWORDS (for schema + future landing pages) ───

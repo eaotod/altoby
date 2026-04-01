@@ -1,0 +1,119 @@
+---
+import Base from "../../layouts/Base.astro";
+import { INDUSTRIES } from "../../data/constants";
+import { PAGE_SEO } from "../../data/seo";
+import Breadcrumbs from "../../components/shared/Breadcrumbs.astro";
+import DynamicHero from "../../components/shared/DynamicHero.astro";
+import IndustryCard from "../../components/shared/IndustryCard.astro";
+import CtaSection from "../../components/home/CtaSection.astro";
+
+const seo = PAGE_SEO.industries;
+---
+
+<Base
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  activePage="industries"
+>
+  <DynamicHero
+    title="Industries We Serve"
+    tagline="Specialist Digital Growth for High-Stakes Sectors."
+    emoji="🎯"
+  >
+    <Breadcrumbs
+      slot="top"
+      items={[
+        { label: "Home", href: "/" },
+        { label: "Industries" },
+      ]}
+    />
+    Generic websites don't work for professional services. We build industry-specific digital assets that reflect the prestige and complexity of your practice.
+  </DynamicHero>
+
+  <section class="industries-grid-section">
+    <div class="container">
+      <div class="grid-header">
+        <div class="section-tag">Market Verticals</div>
+        <h2 class="section-heading">Choose Your <span class="accent">Industry.</span></h2>
+        <p class="section-sub">Explore tailored digital roadmaps designed for your specific business model and customer expectations.</p>
+      </div>
+
+      <div class="industries-grid">
+        {INDUSTRIES.map((industry) => (
+          <div class="grid-item">
+            <IndustryCard industry={industry} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection />
+</Base>
+
+<style>
+  .industries-grid-section {
+    padding: 8rem 0;
+    background: var(--color-bg);
+  }
+
+  .grid-header {
+    margin-bottom: 5rem;
+    max-width: 700px;
+  }
+
+  .section-sub {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-top: 1.5rem;
+  }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 1200px) {
+    .industries-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .industries-grid-section {
+      padding: 6rem 0;
+    }
+
+    .industries-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .grid-header {
+      margin-bottom: 3.5rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Add staggering reveal effect for industry cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.grid-item').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = `opacity 0.6s ${i * 0.1}s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s ${i * 0.1}s cubic-bezier(0.16, 1, 0.3, 1)`;
+    observer.observe(el);
+  });
+</script>
